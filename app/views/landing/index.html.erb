@@ -1,0 +1,16 @@
+<div class="container">
+
+
+  <div class="row"><div class="span8 offset2">
+
+      <h1>Welcome</h1>
+      <% if current_user %>
+        Go to <%= link_to "Tasks", tasks_path %>
+      <% else %>
+        Please <%= link_to "Login", login_path %> or <%= link_to "Register", new_user_path %>
+      <% end %>
+
+  </div></div>
+</div>
+
+

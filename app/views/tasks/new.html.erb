@@ -1,0 +1,24 @@
+<div class="container">
+
+  <h1><%= @task.new_record? ? 'Create New Task' : "Editing #{@task.title}" %></h1>
+
+  <%= semantic_form_for @task do |f| %>
+    <%= f.inputs do %>
+      <%= f.input :index, :input_html => { :class => 'input-small' } %>
+      <%= f.input :title, :input_html => { :class => 'input-xlarge' } %>
+      <%= f.input :description, :as => :ckeditor, :input_html => { :contentsCss => [ stylesheet_path('application') ] } %>
+    <% end %>
+    <%= f.actions do %>
+      <% if @task.new_record? %>
+        <%= f.commit_button "Create Task", :button_html => { :class => 'btn-primary' } %>
+      <% else %>
+        <%= f.commit_button "Update Task", :button_html => { :class => 'btn-primary' } %>
+      <% end %>
+    <% end %>
+  <% end %>
+  <% unless @task.new_record? %>
+    <%= link_to "Delete Task", task_path(@task), :method => 'DELETE',
+      :confirm => 'Are you sure?', :class => 'btn btn-danger' %>
+  <% end %>
+
+</div>

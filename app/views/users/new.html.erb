@@ -1,0 +1,18 @@
+
+<div class="container">
+  <div class="row"><div class="span4 offset4">
+
+<h1>Register New User</h1>
+
+<%= semantic_form_for @user do |f| %>
+  <%= f.semantic_errors %>
+  <%= f.inputs do %>
+    <%= f.inputs :login, :password, :password_confirmation %>
+  <% end %>
+  <%= f.buttons do %>
+    <%= f.commit_button :button_html => { :class => 'btn-primary' } %>
+  <% end %>
+<% end %>
+  </div></div>
+
+</div>

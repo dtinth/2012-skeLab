@@ -1,0 +1,29 @@
+<% content_for :data do %>
+  <div class="span9">
+    <h1>
+      <% if can_manage_tasks %>
+        <a href="<%= edit_task_path %>" class="task-edit-button btn btn-warning">Edit</a>
+      <% end %>
+      <%= @task.title %>
+    </h1>
+    <%= raw @task.description %>
+
+    <form>
+      <h2>Submit Code</h2>
+      <textarea id="code" name="code" class="codemirror">
+using System;
+class Program {
+    public static void Main(string[] args) {
+        // write your program here
+    }
+}</textarea>
+    </form>
+
+    <% if can_manage_tasks %>
+      <a href="<%= task_testcases_path(@task) %>" class="btn btn-inverse">Edit Testcases</a>
+      <a class="btn btn-inverse">Reference Code</a>
+    <% end %>
+
+  </div>
+<% end %>
+<%= render 'taskview' %>

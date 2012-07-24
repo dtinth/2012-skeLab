@@ -1,0 +1,17 @@
+<div class="container">
+  <h1>Testcases in <%= @task.title %></h1>
+  <% unless @testcases.empty? %>
+    <ul>
+      <% @testcases.each do |testcase|; unless testcase.new_record? %>
+        <li>
+          <%= link_to 'Delete', task_testcase_path(@task, testcase),
+                :method => 'DELETE', :confirm => 'Are you sure?' %>
+          <%= link_to 'Edit', edit_task_testcase_path(@task, testcase) %>
+          (<%= testcase.public ? 'Public' : 'Private' %>)
+          <pre><%= testcase.input_data %></pre>
+        </li>
+      <% end; end %>
+    </ul>
+  <% end %>
+  <%= render 'form' %>
+</div>

@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  source_code: MyText
+  runnable: 
+  is_graded: false
+
+two:
+  source_code: MyText
+  runnable: 
+  is_graded: false

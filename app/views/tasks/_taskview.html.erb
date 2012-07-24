@@ -1,0 +1,27 @@
+<div class="container">
+
+  <div class="row">
+    <div class="span3">
+      <h1 class="task-list-header">Task List</h1>
+      <ul class="task-list">
+        <% @tasks.each do |task| %>
+          <li<% if task == @task %> class="active"<% end %>><a href="<%= task_path(task) %>"><%= task.title %></a>
+        <% end %>
+      </ul>
+      <% if can_manage_tasks %>
+        <div class="task-list-actions">
+          <a href="<%= new_task_path %>" class="btn btn-success">New Task</a>
+        </div>
+      <% end %>
+    </div>
+
+    <%= yield :data %>
+    <% if @task %>
+      </div>
+    <% else %>
+    <% end %>
+
+  </div>
+</div>
+
+

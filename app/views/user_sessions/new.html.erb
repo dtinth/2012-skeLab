@@ -1,0 +1,16 @@
+<div class="container">
+
+  <div class="row"><div class="span4 offset4">
+    <h1>Login</h1>
+
+    <%= semantic_form_for @user_session do |f| %>
+      <%= f.inputs do %>
+        <%= f.inputs :login, :password %>
+      <% end %>
+      <%= f.actions do %>
+        <%= f.commit_button "Log In", :button_html => { :class => 'btn-primary' } %>
+      <% end %>
+    <% end %>
+  </div></div>
+
+</div>
