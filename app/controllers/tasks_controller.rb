@@ -42,4 +42,14 @@ class TasksController < ApplicationController
     redirect_to tasks_path
   end
 
+  def submit_code
+    @task = Task.find_by_id!(params[:id])
+    if can_manage_tasks and params[:create_reference]
+      code = @task.create_reference_code!(params[:code])
+      redirect_to code_path(code)
+    elsif params[:create_submission]
+      submission = @task.create_submission(params[:code], current_user)
+    end
+  end
+
 end

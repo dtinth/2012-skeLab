@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120724134602) do
+ActiveRecord::Schema.define(:version => 20120724142736) do
 
   create_table "codes", :force => true do |t|
     t.text     "source_code"
@@ -20,10 +20,29 @@ ActiveRecord::Schema.define(:version => 20120724134602) do
     t.boolean  "is_graded"
     t.datetime "created_at",    :null => false
     t.datetime "updated_at",    :null => false
-    t.integer  "task_id"
   end
 
   add_index "codes", ["runnable_id"], :name => "index_codes_on_runnable_id"
+
+  create_table "results", :force => true do |t|
+    t.integer  "code_id"
+    t.integer  "testcase_id"
+    t.text     "input"
+    t.text     "output"
+    t.boolean  "is_graded"
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
+  end
+
+  create_table "submissions", :force => true do |t|
+    t.integer  "task_id"
+    t.integer  "user_id"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  add_index "submissions", ["task_id"], :name => "index_submissions_on_task_id"
+  add_index "submissions", ["user_id"], :name => "index_submissions_on_user_id"
 
   create_table "tasks", :force => true do |t|
     t.integer  "index"

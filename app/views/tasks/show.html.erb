@@ -6,23 +6,35 @@
       <% end %>
       <%= @task.title %>
     </h1>
-    <%= raw @task.description %>
 
-    <form>
-      <h2>Submit Code</h2>
-      <textarea id="code" name="code" class="codemirror">
+    <div class="task-description">
+      <%= raw @task.description %>
+      <p class="meta"><%= pluralize @task.testcases.count, 'testcase' %></p>
+      <% if can_manage_tasks %>
+        <a href="<%= task_testcases_path(@task) %>" class="btn btn-inverse">Edit Testcases</a>
+      <% end %>
+    </div>
+
+    <div class="task-submitter">
+      <%= form_tag(submit_code_task_path(@task), :method => 'POST') do %>
+        <h2>Submit Code</h2>
+        <textarea id="code" name="code" class="codemirror">
 using System;
 class Program {
     public static void Main(string[] args) {
         // write your program here
     }
 }</textarea>
-    </form>
+        <div class="form-actions">
+          <input type="submit" name="create_submission" class="btn btn-inverse" value="Submit Code">
+          <% if can_manage_tasks %>
+            <input type="submit" name="create_reference" class="btn btn-warning" value="Submit Reference Code"
+              onclick="return confirm('Do you want to submit the reference code?\nMake sure you already added the testcases!')">
+          <% end %>
+        </div>
+      <% end %>
+    </div>
 
-    <% if can_manage_tasks %>
-      <a href="<%= task_testcases_path(@task) %>" class="btn btn-inverse">Edit Testcases</a>
-      <a class="btn btn-inverse">Reference Code</a>
-    <% end %>
 
   </div>
 <% end %>

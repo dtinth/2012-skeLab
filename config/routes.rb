@@ -1,13 +1,15 @@
 SkeLab::Application.routes.draw do
 
-  get "testcases/index"
-
-  get "testcases/edit"
 
   mount Ckeditor::Engine => '/ckeditor'
 
+  resources :codes
+
   resources :tasks do
     resources :testcases
+    member do
+      post 'submit_code'
+    end
   end
 
   get "login" => "user_sessions#new", :as => "login"
