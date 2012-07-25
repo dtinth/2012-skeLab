@@ -4,9 +4,9 @@
     <ul>
       <% @testcases.each do |testcase|; unless testcase.new_record? %>
         <li>
+          <%= link_to 'Edit', edit_task_testcase_path(@task, testcase) %> |
           <%= link_to 'Delete', task_testcase_path(@task, testcase),
-                :method => 'DELETE', :confirm => 'Are you sure?' %>
-          <%= link_to 'Edit', edit_task_testcase_path(@task, testcase) %>
+                :method => 'DELETE', :confirm => 'Are you sure?' %> |
           (<%= testcase.public ? 'Public' : 'Private' %>)
           <pre><%= testcase.input_data %></pre>
         </li>

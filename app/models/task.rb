@@ -2,8 +2,16 @@ class Task < ActiveRecord::Base
   attr_accessible :description, :index, :title
   validates_presence_of :description, :index, :title
   has_many :testcases
-  has_many :reference_codes, :as => :runnable, :class_name => "Code"
+  has_many :reference_codes, :as => :runnable, :class_name => "Code", :order => 'id ASC'
   has_many :codes
+
+  def reference_code
+    reference_codes.last
+  end
+
+  def can_submit
+    reference_code && reference_code.is_graded
+  end
 
   def create_reference_code!(source_code)
     Code.submit_code!(source_code, self, testcases)

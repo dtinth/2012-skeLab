@@ -21,15 +21,21 @@
         <textarea id="code" name="code" class="codemirror">
 using System;
 class Program {
-    public static void Main(string[] args) {
+    public static void Main() {
         // write your program here
     }
 }</textarea>
         <div class="form-actions">
-          <input type="submit" name="create_submission" class="btn btn-inverse" value="Submit Code">
           <% if can_manage_tasks %>
-            <input type="submit" name="create_reference" class="btn btn-warning" value="Submit Reference Code"
-              onclick="return confirm('Do you want to submit the reference code?\nMake sure you already added the testcases!')">
+            <div class="task-edit-button">
+              <input type="submit" name="create_reference" class="btn btn-warning" value="Submit Reference Code"
+                onclick="return confirm('Do you want to submit the reference code?\nMake sure you already added the testcases!')">
+            </div>
+          <% end %>
+          <% if @task.can_submit %>
+            <input type="submit" name="create_submission" class="btn btn-inverse" value="Submit Code">
+          <% else %>
+            <input type="button" class="btn btn-inverse" value="Task Not Ready" disabled="disabled">
           <% end %>
         </div>
       <% end %>

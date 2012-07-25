@@ -1,3 +1,5 @@
+require 'digest/md5'
+
 class Code < ActiveRecord::Base
   belongs_to :runnable, :polymorphic => true
   attr_accessible :is_graded, :source_code
@@ -13,6 +15,21 @@ class Code < ActiveRecord::Base
     end
     code.runnable = runnable
     code.save!
+    code
+  end
+
+  def secret
+    Digest::MD5.hexdigest("code submission on skeLab, id #{id}.")
+  end
+
+  def to_param
+    "#{id}:#{secret}"
+  end
+
+  def self.from_param(param, options = {})
+    id, secret = param.split(':')
+    code = Code.find(id)
+    raise "Invalid secret!" unless code.secret == secret or options[:bypass_secret]
     code
   end
 end

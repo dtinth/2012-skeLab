@@ -3,7 +3,11 @@ SkeLab::Application.routes.draw do
 
   mount Ckeditor::Engine => '/ckeditor'
 
-  resources :codes
+  resources :codes do
+    collection do
+      get 'ungraded'
+    end
+  end
 
   resources :tasks do
     resources :testcases
