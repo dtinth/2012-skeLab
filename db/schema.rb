@@ -11,15 +11,17 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120724142736) do
+ActiveRecord::Schema.define(:version => 20120726145658) do
 
   create_table "codes", :force => true do |t|
     t.text     "source_code"
     t.integer  "runnable_id"
     t.string   "runnable_type"
     t.boolean  "is_graded"
-    t.datetime "created_at",    :null => false
-    t.datetime "updated_at",    :null => false
+    t.datetime "created_at",     :null => false
+    t.datetime "updated_at",     :null => false
+    t.boolean  "is_success"
+    t.string   "error_messages"
   end
 
   add_index "codes", ["runnable_id"], :name => "index_codes_on_runnable_id"
@@ -30,8 +32,11 @@ ActiveRecord::Schema.define(:version => 20120724142736) do
     t.text     "input"
     t.text     "output"
     t.boolean  "is_graded"
-    t.datetime "created_at",  :null => false
-    t.datetime "updated_at",  :null => false
+    t.datetime "created_at",     :null => false
+    t.datetime "updated_at",     :null => false
+    t.boolean  "is_success"
+    t.string   "error_messages"
+    t.text     "output_json"
   end
 
   create_table "submissions", :force => true do |t|
@@ -48,8 +53,10 @@ ActiveRecord::Schema.define(:version => 20120724142736) do
     t.integer  "index"
     t.string   "title"
     t.text     "description"
-    t.datetime "created_at",  :null => false
-    t.datetime "updated_at",  :null => false
+    t.datetime "created_at",           :null => false
+    t.datetime "updated_at",           :null => false
+    t.boolean  "public"
+    t.boolean  "show_example_results"
   end
 
   create_table "testcases", :force => true do |t|

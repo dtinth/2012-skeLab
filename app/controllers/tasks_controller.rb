@@ -1,6 +1,7 @@
 class TasksController < ApplicationController
+
   def index
-    @tasks = Task.all
+    @tasks = tasklist
   end
 
   def new
@@ -17,8 +18,25 @@ class TasksController < ApplicationController
   end
 
   def show
-    @tasks = Task.all
-    @task = Task.find_by_id!(params[:id])
+    @tasks = tasklist
+    @task = get_task
+    @my_submissions = Submission.where(:user_id => current_user.id, :task_id => @task.id).order('created_at DESC')
+    @starting_code = <<CODE
+using System;
+class Program
+{
+    public static void Main()
+    {
+        // write your program here
+    }
+}
+CODE
+    if params[:base]
+      submission = Submission.find(params[:base])
+      if submission.user == current_user or can_manage_tasks
+        @starting_code = submission.code.source_code
+      end
+    end
   end
 
   def edit
@@ -43,13 +61,25 @@ class TasksController < ApplicationController
   end
 
   def submit_code
-    @task = Task.find_by_id!(params[:id])
+    @task = get_task
     if can_manage_tasks and params[:create_reference]
       code = @task.create_reference_code!(params[:code])
       redirect_to code_path(code)
     elsif params[:create_submission]
-      submission = @task.create_submission(params[:code], current_user)
+      submission = @task.create_submission!(params[:code], current_user)
+      redirect_to submission_path(submission)
     end
+  end
+
+  private
+  def tasklist
+    Task.tasklist(can_manage_tasks)
+  end
+
+  def get_task
+    task = Task.find_by_id!(params[:id])
+    raise "private task" unless task.public or can_work_on_private_tasks
+    task
   end
 
 end

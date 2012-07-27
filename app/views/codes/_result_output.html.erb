@@ -1,0 +1,13 @@
+
+<% if result.is_graded %>
+  <% lines = result.input.lines.to_a %>
+  <pre><%
+  ActiveSupport::JSON.decode(result.output_json).each do |text|
+    %><%= text %><span class="input"><%= lines.shift.to_s.chomp %></span><br><%
+  end %><%
+  unless result.error_messages.to_s.empty?
+    %><span class="error"><%= result.error_messages %></span><%
+  end %></pre>
+<% else %>
+  (ungraded)
+<% end %>

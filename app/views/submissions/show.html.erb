@@ -1,0 +1,38 @@
+
+<div class="container">
+  <h1>Grading Result : [<%= @submission.gradestring %>] =
+    <%= @submission.score %>%</h1>
+  <p>Submitted by <%= @submission.user.login %> for task <%= link_to @submission.task.title, @submission.task %></p>
+  <% if @submission.score < 100 %>
+  <% else %>
+    <p>Your code is correct!</p>
+  <% end %>
+  <h2>Your Code</h2>
+  <a href="<%= task_path(@submission.task, :base => @submission.id) %>" class="btn btn-inverse copy-to-current">copy to current</a>
+  <pre><%= @submission.code.source_code %></pre>
+
+  <% if @submission.task.show_example_results %>
+    <h2>Results</h2>
+    <div class="code-head">
+      <div class="row-fluid">
+        <div class="span2"><h3>Testcase</h3></div>
+        <div class="span5">
+          <h3>Expected Result</h3>
+        </div>
+        <div class="span5">
+          <h3>Actual Result</h3>
+        </div>
+      </div>
+    </div>
+    <% count = 0; @submission.code.results.select { |result| result.testcase.public }.each do |result|; count += 1 %>
+      <div class="code-result">
+        <div class="row-fluid">
+          <div class="span2"><h3>Testcase #<%= count %></h3></div>
+          <div class="span5 show-spaces"><%= render :partial => 'codes/result_output', :locals => { :result => result.reference_result } %></div>
+          <div class="span5 show-spaces"><%= render :partial => 'codes/result_output', :locals => { :result => result } %></div>
+        </div>
+      </div>
+    <% end %>
+  <% else %>
+  <% end %>
+</div>

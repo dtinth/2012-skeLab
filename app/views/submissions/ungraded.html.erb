@@ -1,0 +1,23 @@
+<div class="container">
+  <h1>Grading, please wait!</h1>
+  <p>........</p>
+</div>
+<script>
+$(function() {
+  function check() {
+    $.ajax(<%= raw ActiveSupport::JSON.encode(check_submission_path(@submission)) %>
+    + '?time=' + new Date().getTime()
+    , {
+        success: function(data) {
+          if (data.graded) {
+            location.reload()
+          } else {
+            setTimeout(check, data.check_in * 1000)
+          }
+        }
+      , dataType: 'json'
+      })
+  }
+  setTimeout(check, 1500)
+})
+</script>

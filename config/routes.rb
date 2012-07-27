@@ -1,11 +1,22 @@
 SkeLab::Application.routes.draw do
 
 
+  get "submissions/show"
+
   mount Ckeditor::Engine => '/ckeditor'
 
   resources :codes do
     collection do
       get 'ungraded'
+    end
+    member do
+      post 'grade'
+    end
+  end
+
+  resources :submissions do
+    member do
+      get 'check'
     end
   end
 

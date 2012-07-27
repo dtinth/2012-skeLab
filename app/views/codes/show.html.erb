@@ -7,8 +7,12 @@
     <pre><%= @code.source_code %></pre>
   </div>
   <div class="code-results">
+    <% unless @code.error_messages.to_s.empty? %>
+      <h2>Compile Error</h2>
+      <pre><span class="error"><%= @code.error_messages %></span></pre>
+    <% end %>
     <div class="code-head">
-      <div class="row">
+      <div class="row-fluid">
         <div class="span2"><h3>Testcase</h3></div>
         <div class="span5">
           <h3>Input</h3>
@@ -18,22 +22,6 @@
         </div>
       </div>
     </div>
-    <% count = 0; @code.results.each do |result|; count += 1 %>
-      <div class="code-result">
-        <div class="row">
-          <div class="span2"><h3>Testcase #<%= count %></h3></div>
-          <div class="span5">
-            <pre><%= result.input %></pre>
-          </div>
-          <div class="span5">
-            <% if result.is_graded %>
-              <pre><%= result.output %></pre>
-            <% else %>
-              (ungraded)
-            <% end %>
-          </div>
-        </div>
-      </div>
-    <% end %>
+    <%= render :partial => 'results', :locals => { :results => @code.results } %>
   </div>
 </div>

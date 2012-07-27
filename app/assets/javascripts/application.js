@@ -40,5 +40,42 @@ $(function() {
     $(this).data('editor', editor)
   })
 
+  $('.show-spaces pre').each(function() {
+    addSpaces(this)
+  })
+
+  function addSpaces(node) {
+    if (node.nodeType == 3) {
+      var match = node.nodeValue.match(/[ \t\n]/)
+      if (match) {
+        var space = match.index
+          , spaceNode = node.splitText(space)
+          , restNode = spaceNode.splitText(1)
+          , span = document.createElement('span')
+        span.className = 'space'
+        if (match[0] == '\t') {
+          var tab = document.createElement('span')
+          var tabB = document.createElement('b')
+          tabB.appendChild(document.createTextNode('-------->'))
+          tab.appendChild(tabB)
+          span.appendChild(tab)
+          span.className = 'space tab'
+        } else if (match[0] == '\n') {
+          spaceNode.nodeValue = '\u00AC\n'
+        } else {
+          spaceNode.nodeValue = '.'
+        }
+        spaceNode.parentNode.insertBefore(span, spaceNode)
+        span.appendChild(spaceNode)
+        return span
+      }
+    } else if (node.nodeType == 1) {
+      for (var c = node.firstChild; c; c = c.nextSibling) {
+        c = addSpaces(c)
+      }
+    }
+    return node
+  }
+
 })
 

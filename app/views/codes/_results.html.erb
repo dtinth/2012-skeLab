@@ -1,0 +1,5 @@
+<% count = 0; results.each do |result|; count += 1 %>
+<%= render :partial => 'codes/result', :locals => {
+  :result => result, :count => count, :noun => defined?(noun) ? noun : 'Testcase',
+  :show_input => defined?(show_input) ? show_input : true } %>
+<% end %>

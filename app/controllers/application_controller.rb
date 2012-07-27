@@ -8,6 +8,10 @@ class ApplicationController < ActionController::Base
       is_admin
     end
 
+    def can_work_on_private_tasks
+      is_admin
+    end
+
     def task_manage
       raise "Forbidden" unless can_manage_tasks
     end
@@ -25,4 +29,5 @@ class ApplicationController < ActionController::Base
     def is_admin
       current_user.is_admin
     end
+
 end

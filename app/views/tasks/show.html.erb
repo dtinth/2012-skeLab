@@ -8,8 +8,12 @@
     </h1>
 
     <div class="task-description">
-      <%= raw @task.description %>
-      <p class="meta"><%= pluralize @task.testcases.count, 'testcase' %></p>
+      <div class="task-description-text">
+        <%= raw @task.description %>
+      </div>
+      <p class="meta"><%= pluralize @task.testcases.count, 'testcase' %>,
+        <%= pluralize @task.submissions.count, 'submission' %></p>
+      <%= render :partial => 'codes/results', :locals => { :noun => 'Example', :results => @task.public_results, :show_input => false } %>
       <% if can_manage_tasks %>
         <a href="<%= task_testcases_path(@task) %>" class="btn btn-inverse">Edit Testcases</a>
       <% end %>
@@ -18,13 +22,7 @@
     <div class="task-submitter">
       <%= form_tag(submit_code_task_path(@task), :method => 'POST') do %>
         <h2>Submit Code</h2>
-        <textarea id="code" name="code" class="codemirror">
-using System;
-class Program {
-    public static void Main() {
-        // write your program here
-    }
-}</textarea>
+        <textarea id="code" name="code" class="codemirror"><%= @starting_code %></textarea>
         <div class="form-actions">
           <% if can_manage_tasks %>
             <div class="task-edit-button">
@@ -41,6 +39,14 @@ class Program {
       <% end %>
     </div>
 
+    <% unless @my_submissions.empty? %>
+      <h2>My Previous Submissions</h2>
+      <ul>
+        <% @my_submissions.each do |sub| %>
+          <li><a href="<%= submission_path(sub) %>">Submission #<%= sub.id %></a> &mdash; <%= distance_of_time_in_words_to_now(sub.created_at) %> ago
+        <% end %>
+      </ul>
+    <% end %>
 
   </div>
 <% end %>

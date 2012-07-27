@@ -14,7 +14,7 @@
   background: #151413;
   @include cm-color(#d9d8d7);
 
-  font: 14px Monaco, Consolas;
+  font: 14px Monaco, Consolas, Courier New;
 
   .CodeMirror-selected { background: #666 !important; }
   .CodeMirror-gutter { background: #000; border-right: 0; padding-right: 8px; }

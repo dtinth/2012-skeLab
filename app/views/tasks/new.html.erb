@@ -7,6 +7,7 @@
       <%= f.input :index, :input_html => { :class => 'input-small' } %>
       <%= f.input :title, :input_html => { :class => 'input-xlarge' } %>
       <%= f.input :description, :as => :ckeditor, :input_html => { :contentsCss => [ stylesheet_path('application') ] } %>
+      <%= f.inputs :public, :show_example_results %>
     <% end %>
     <%= f.actions do %>
       <% if @task.new_record? %>

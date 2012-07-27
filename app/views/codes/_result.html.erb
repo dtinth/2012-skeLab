@@ -1,0 +1,18 @@
+<div class="code-result">
+  <div class="row-fluid">
+    <% if !defined?(show_input) || show_input %>
+      <div class="span2"><h3>Testcase #<%= count %></h3></div>
+      <div class="span5">
+        <pre><% if result.input.to_s.chomp.empty? %><span class="no-input">(no input text)</span><% else %><%= result.input %><% end %></pre>
+      </div>
+      <div class="span5">
+        <%= render :partial => 'codes/result_output', :locals => { :result => result } %>
+      </div>
+    <% else %>
+      <div class="span3"><h3><%= defined?(noun) ? noun : 'Testcase' %> #<%= count %></h3></div>
+      <div class="span9">
+        <%= render :partial => 'codes/result_output', :locals => { :result => result } %>
+      </div>
+    <% end %>
+  </div>
+</div>
