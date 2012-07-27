@@ -2,8 +2,14 @@ set :application, "skeLab"
 set :repository,  "skuba:skeLab/web.git"
 set :scm, :git
 
-set :domain, '158.108.180.168'
+set :user, 'skuba'
+set :use_sudo, false
+set :domain, 'skuba'
 set :deploy_to, '/home/skuba/skeLab/web'
+
+default_run_options[:pty] = true
+ssh_options[:keys] = ['/Users/dttvb/.ssh/skuba_id_rsa']
+ssh_options[:forward_agent] = true
 
 server domain, :web, :app, :db, :primary => true
 
