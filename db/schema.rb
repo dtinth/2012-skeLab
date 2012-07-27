@@ -11,7 +11,17 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120727094842) do
+ActiveRecord::Schema.define(:version => 20120727173741) do
+
+  create_table "attendances", :force => true do |t|
+    t.integer  "user_id"
+    t.integer  "period_id"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  add_index "attendances", ["period_id"], :name => "index_attendances_on_period_id"
+  add_index "attendances", ["user_id"], :name => "index_attendances_on_user_id"
 
   create_table "codes", :force => true do |t|
     t.text     "source_code"
@@ -25,6 +35,13 @@ ActiveRecord::Schema.define(:version => 20120727094842) do
   end
 
   add_index "codes", ["runnable_id"], :name => "index_codes_on_runnable_id"
+
+  create_table "periods", :force => true do |t|
+    t.boolean  "is_active",  :default => false
+    t.date     "date"
+    t.datetime "created_at",                    :null => false
+    t.datetime "updated_at",                    :null => false
+  end
 
   create_table "results", :force => true do |t|
     t.integer  "code_id"
