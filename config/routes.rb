@@ -28,6 +28,8 @@ SkeLab::Application.routes.draw do
   end
 
   get "login" => "user_sessions#new", :as => "login"
+  get "login/facebook" => "user_sessions#new_with_facebook", :as => "login_facebook"
+  post "facebook" => "user_sessions#handle_facebook_redirect"
   get "logout" => "user_sessions#destroy", :as => "logout"
   resources :user_sessions
 

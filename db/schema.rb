@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120726145658) do
+ActiveRecord::Schema.define(:version => 20120727094842) do
 
   create_table "codes", :force => true do |t|
     t.text     "source_code"
@@ -83,6 +83,8 @@ ActiveRecord::Schema.define(:version => 20120726145658) do
     t.datetime "created_at",                       :null => false
     t.datetime "updated_at",                       :null => false
     t.boolean  "is_admin"
+    t.string   "fbid"
+    t.string   "name"
   end
 
 end

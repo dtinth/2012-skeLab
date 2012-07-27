@@ -2,7 +2,7 @@
 <div class="container">
   <h1>Grading Result : [<%= @submission.gradestring %>] =
     <%= @submission.score %>%</h1>
-  <p>Submitted by <%= @submission.user.login %> for task <%= link_to @submission.task.title, @submission.task %></p>
+  <p>Submitted by <%= user_html @submission.user %> for task <%= link_to @submission.task.title, @submission.task %></p>
   <% if @submission.score < 100 %>
   <% else %>
     <p>Your code is correct!</p>

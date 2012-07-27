@@ -1,4 +1,6 @@
 class UsersController < ApplicationController
+  before_filter :disable_user_creation
+
   def new
     @user = User.new
   end
@@ -11,5 +13,9 @@ class UsersController < ApplicationController
     else
       render :action => :new
     end
+  end
+
+  def disable_user_creation
+    raise "User creation disabled!"
   end
 end
