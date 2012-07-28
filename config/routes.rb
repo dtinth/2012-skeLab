@@ -1,6 +1,10 @@
 SkeLab::Application.routes.draw do
 
 
+  get "attendances/index"
+
+  get "attendance/index"
+
   get "submissions/show"
 
   mount Ckeditor::Engine => '/ckeditor'
@@ -33,8 +37,16 @@ SkeLab::Application.routes.draw do
   get "logout" => "user_sessions#destroy", :as => "logout"
   resources :user_sessions
 
+  resources :attendances
+
   root :to => "landing#index"
   resources :users
+
+  resources :periods do
+    collection do
+      get 'stop'
+    end
+  end
 
   mount Ckeditor::Engine => "/ckeditor"
 

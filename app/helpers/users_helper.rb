@@ -10,4 +10,5 @@ module UsersHelper
     end
     html
   end
+
 end

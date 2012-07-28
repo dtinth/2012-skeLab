@@ -15,6 +15,7 @@
 </head>
 <body>
 
+<!--<%= request.ip %>-->
 <div class="navbar navbar-fixed-top">
   <div class="navbar-inner">
     <div class="container">
@@ -29,6 +30,9 @@
           <li><%= link_to "Home", root_path %></li>
           <% if current_user %>
             <li><%= link_to "Tasks", tasks_path %></li>
+            <% if is_admin %>
+              <li><%= link_to "Attendance Checking", attendances_path %></li>
+            <% end %>
             <li><%= link_to "Logout", logout_path %></li>
           <% else %>
             <li><%= link_to "Login", login_path %></li>
@@ -38,6 +42,29 @@
     </div>
   </div>
 </div>
+
+<% if current_user && is_checking_attendance && !is_current_user_attending %>
+  <div class="container">
+    <%= form_tag attendances_path do %>
+      <div class="well attendance-checking-notification">
+        <div>We are checking your attendance! Please mark your attendance:
+          <button type="submit" name="mark" class="btn btn-success"><i class=icon-group></i> Mark My Attendance</button>
+          </div>
+      </div>
+    <% end %>
+  </div>
+<% end %>
+<% if current_user && is_admin && is_checking_attendance %>
+  <div class="container">
+    <%= form_tag attendances_path do %>
+      <div class="well attendance-checking-notification">
+        <div>Attendance checking is active!
+          <button type="submit" name="stop" class="btn btn-inverse"><i class=icon-remove></i> Stop Checking</button>
+          </div>
+      </div>
+    <% end %>
+  </div>
+<% end %>
 
 <%= content_for?(:content) ? yield(:content) : yield %>
 

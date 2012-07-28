@@ -1,0 +1,29 @@
+
+<div class="container">
+  <h1>Attendance Checking</h1>
+  <% unless is_checking_attendance %>
+    <%= form_tag periods_path, :method => 'POST' do %>
+      <%= submit_tag "Start Checking Attendance", :class => "btn btn-primary", :confirm => "Are you sure?" %>
+    <% end %>
+  <% end %>
+
+  <table class="table table-bordered attendance-table" style="width:auto">
+    <thead>
+      <tr>
+        <th>User</th>
+        <% @periods.each do |period| %><th><%= period.date %></th><% end %>
+      </tr>
+    </thead>
+    <tbody>
+      <% @users.each do |user| %>
+        <tr>
+          <th><%= user_html user %>
+          <% @periods.each do |period| %>
+            <td><i class="<%= @attendance_map.has(user.id, period.id) ? 'icon-ok' : 'icon-remove' %>"></i>
+          <% end %>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+  
+</div>
