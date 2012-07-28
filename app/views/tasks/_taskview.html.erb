@@ -5,8 +5,13 @@
       <h1 class="task-list-header">Task List</h1>
       <ul class="task-list">
         <% @tasks.each do |task| %>
-          <li<% if task == @task %> class="active"<% end %>><a href="<%= task_path(task) %>"
-            ><% if can_manage_tasks %><%= task.index %> - <% end %><%= task.title %><% unless task.public %> <i>(private)</i><% end %></a>
+          <li<% if task == @task %> class="active"<% end %>>
+            <a href="<%= task_path(task) %>" >
+              <% if can_manage_tasks %><%= task.index %> - <% end %>
+              <%= task.title %>
+              <% unless task.public %><i>(private)</i><% end %>
+              <% if task.passed_users.exists?(current_user) %><i class=icon-ok></i><% end %>
+            </a>
         <% end %>
       </ul>
       <% if can_manage_tasks %>

@@ -38,8 +38,9 @@ class Submission < ActiveRecord::Base
     else
       @score = 0
     end
+    self.score = @score
+    save!
   end
 
   attr_reader :gradestring
-  attr_reader :score
 end

@@ -29,14 +29,15 @@
         <div class="form-actions">
           <% if can_manage_tasks %>
             <div class="task-edit-button">
-              <input type="submit" name="save_default" class="btn btn-warning" value="Save Default Code"
-                onclick="return confirm('Are you sure?')">
-              <input type="submit" name="create_reference" class="btn btn-warning" value="Submit Reference Code"
+              <button type="submit" name="save_default" class="btn btn-warning"
+                onclick="return confirm('Are you sure?')"><i class="icon-save"></i> Save Default Code</button>
+              <button type="submit" name="create_reference" class="btn btn-warning"
                 onclick="return confirm('Do you want to submit the reference code?\nMake sure you already added the testcases!')">
+                <i class="icon-road"></i> Submit Reference Code</button>
             </div>
           <% end %>
           <% if @task.can_submit %>
-            <input type="submit" name="create_submission" class="btn btn-inverse" value="Submit Code">
+            <button type="submit" name="create_submission" class="btn btn-inverse"><i class="icon-plane"></i> Submit Code</button>
           <% else %>
             <input type="button" class="btn btn-inverse" value="Task Not Ready" disabled="disabled">
           <% end %>

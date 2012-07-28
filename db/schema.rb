@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120728095340) do
+ActiveRecord::Schema.define(:version => 20120728140647) do
 
   create_table "attendances", :force => true do |t|
     t.integer  "user_id"
@@ -61,6 +61,7 @@ ActiveRecord::Schema.define(:version => 20120728095340) do
     t.integer  "user_id"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
+    t.integer  "score"
   end
 
   add_index "submissions", ["task_id"], :name => "index_submissions_on_task_id"
