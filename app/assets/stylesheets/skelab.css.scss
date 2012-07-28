@@ -47,3 +47,11 @@ span.space.tab {
 .attendance-checking-notification.well {
   background: #445;
 }
+
+.code-result pre {
+  -moz-user-select: none;
+  -webkit-user-select: none;
+  -ms-user-select: none;
+  -o-user-select: none;
+  user-select: none;
+}

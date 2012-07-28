@@ -33,7 +33,11 @@ class Submission < ActiveRecord::Base
         @gradestring += 'X'
       end
     end
-    @score = score * 100 / testcount
+    if testcount > 0
+      @score = score * 100 / testcount
+    else
+      @score = 0
+    end
   end
 
   attr_reader :gradestring

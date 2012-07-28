@@ -7,6 +7,12 @@
   <% else %>
     <p>Your code is correct!</p>
   <% end %>
+
+  <% unless @submission.code.error_messages.to_s.empty? %>
+    <h2>Compile Error</h2>
+    <pre><span class="error"><%= @submission.code.error_messages %></span></pre>
+  <% end %>
+
   <h2>Your Code</h2>
   <a href="<%= task_path(@submission.task, :base => @submission.id) %>" class="btn btn-inverse copy-to-current">copy to current</a>
   <pre><%= @submission.code.source_code %></pre>
