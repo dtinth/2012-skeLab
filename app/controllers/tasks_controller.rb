@@ -21,7 +21,7 @@ class TasksController < ApplicationController
     @tasks = tasklist
     @task = get_task
     @my_submissions = Submission.where(:user_id => current_user.id, :task_id => @task.id).order('created_at DESC')
-    @starting_code = <<CODE
+    @starting_code = @task.default_code || <<CODE
 using System;
 class Program
 {
@@ -65,6 +65,10 @@ CODE
     if can_manage_tasks and params[:create_reference]
       code = @task.create_reference_code!(params[:code])
       redirect_to code_path(code)
+    elsif params[:save_default]
+      @task.default_code = params[:code]
+      @task.save!
+      redirect_to task_path(@task)
     elsif params[:create_submission]
       submission = @task.create_submission!(params[:code], current_user)
       redirect_to submission_path(submission)

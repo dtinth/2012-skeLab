@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120727173741) do
+ActiveRecord::Schema.define(:version => 20120728095340) do
 
   create_table "attendances", :force => true do |t|
     t.integer  "user_id"
@@ -74,6 +74,7 @@ ActiveRecord::Schema.define(:version => 20120727173741) do
     t.datetime "updated_at",           :null => false
     t.boolean  "public"
     t.boolean  "show_example_results"
+    t.text     "default_code"
   end
 
   create_table "testcases", :force => true do |t|
