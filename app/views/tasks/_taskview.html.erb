@@ -10,7 +10,9 @@
               <% if can_manage_tasks %><%= task.index %> - <% end %>
               <%= task.title %>
               <% unless task.public %><i>(private)</i><% end %>
-              <% if task.passed_users.exists?(current_user) %><i class=icon-ok></i><% end %>
+              <% if task.passed_users.exists?(current_user) %>
+                <i class=icon-ok></i>
+              <% end %>
             </a>
         <% end %>
       </ul>

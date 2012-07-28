@@ -1,5 +1,9 @@
 class UsersController < ApplicationController
-  before_filter :disable_user_creation
+  before_filter :disable_user_creation, :except => [:index]
+  def index
+    @users = User.all
+    @tasks = Task.includes(:passed_users).includes(:submitted_users).all
+  end
 
   def new
     @user = User.new

@@ -7,6 +7,7 @@ class Task < ActiveRecord::Base
   has_many :codes
   has_many :submissions
   has_many :passed_users, :through => :submissions, :source => :user, :conditions => 'submissions.score = 100'
+  has_many :submitted_users, :through => :submissions, :source => :user
 
   def self.tasklist(all=false)
     tasks = order('`index` ASC')

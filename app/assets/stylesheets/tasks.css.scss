@@ -10,10 +10,16 @@
     background: #222;
     border-bottom: 1px solid #111;
     border-top: 1px solid #333;
+    &:hover {
+      background: #333; 
+    }
     a {
       color: #ddd;
       display: block;
       padding: 3px 7px;
+      &:hover {
+        text-decoration: none;
+      }
     }
     &.active {
       $bg: #38d;
@@ -21,6 +27,9 @@
       border-top-color: $bg + #111;
       border-bottom-color: $bg - #111;
       a { color: #fff; }
+    }
+    &:not(.active) {
+      .icon-ok { color: #8f8; }
     }
   }
 }

@@ -1,0 +1,29 @@
+<div class="container">
+  <h1>Users Dashboard</h1>
+  <table class="table table-bordered">
+    <thead>
+      <tr>
+        <th>User</th>
+        <% @tasks.each do |task| %>
+          <th class="user-task-head"><span><a href="<%= task_path(task) %>"><%= task.title %></a></th>
+        <% end %>
+      </tr>
+    </thead>
+    <tbody>
+      <% @users.each do |user| %>
+        <tr>
+          <td><%= user_html user %>
+          <% @tasks.each do |task| %>
+            <% if task.passed_users.exists?(user) %>
+              <td class="user-task-passed"><i class="icon-ok"></i></td>
+            <% elsif task.submitted_users.exists?(user) %>
+              <td class="user-task-working"><i class="icon-remove"></i></td>
+            <% else %>
+              <td class="user-task-none"><i class="icon-minus"></i></td>
+            <% end %>
+          <% end %>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>
