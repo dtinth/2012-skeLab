@@ -22,6 +22,19 @@
 /*global CodeMirror*/
 $(function() {
 
+  $('[data-source-code]').each(function() {
+    var code = this.getAttribute('data-source-code')
+    this.innerHTML = ''
+    var editor = CodeMirror(this, {
+      lineNumbers: true
+    , mode: "text/x-csharp"
+    , theme: "dtinth256"
+    , indentUnit: 4
+    , lineWrapping: true
+    , readOnly: true
+    , value: code
+    })
+  })
   $('textarea.codemirror').each(function() {
     var highlightLine
     var editor = CodeMirror.fromTextArea(this, {

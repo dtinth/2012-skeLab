@@ -15,7 +15,9 @@
 
   <h2>Your Code</h2>
   <a href="<%= task_path(@submission.task, :base => @submission.id) %>" class="btn btn-inverse copy-to-current"><i class=icon-copy></i> copy to current</a>
-  <pre><%= @submission.code.source_code %></pre>
+  <div data-source-code="<%= @submission.code.source_code %>" id="source-code">
+    <pre><%= @submission.code.source_code %></pre>
+  </div>
 
   <% if @submission.task.show_example_results %>
     <h2>Results</h2>
