@@ -2,15 +2,22 @@
 @import 'compass';
 
 .user-task-head {
-  height: 160px;
+  height: 240px;
   span {
     position: relative;
     display: block;
     width: 18px;
     a {
-      @include transform(translateX(18px) rotate(-90deg));
-      @include transform-origin(bottom, left);
+      @include transform(translateY(18px) rotate(-90deg));
+      @include transform-origin(top, left);
       display: block;
+      width: 240px;
     }
   }
 }
+.user-task-passed, .user-task-working, .user-task-none {
+  text-align: center;
+}
+.user-task-passed { color: #6f6; }
+.user-task-working { color: #ee4; }
+.user-task-none { color: #666; }
