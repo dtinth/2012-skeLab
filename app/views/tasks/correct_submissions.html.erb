@@ -1,0 +1,11 @@
+<div class="container">
+  <h1>Correct Submissions for <%= link_to @task.title, @task %></h1>
+  <table class="table table-bordered">
+    <% @submissions.each do |submission| %>
+      <tr>
+        <td><%= link_to "Submission ##{submission.id}" %></td>
+        <td><%= user_html submission.user %></td>
+      </tr>
+    <% end %>
+  </table>
+</div>

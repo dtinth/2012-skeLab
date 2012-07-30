@@ -8,6 +8,11 @@ class TasksController < ApplicationController
     @task = Task.new
   end
 
+  def correct_submissions
+    @task = get_task
+    @submissions = @task.submissions.where(:score => 100)
+  end
+
   def create
     @task = Task.new(params[:task])
     if @task.save

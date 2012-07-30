@@ -28,6 +28,7 @@ SkeLab::Application.routes.draw do
     resources :testcases
     member do
       post 'submit_code'
+      get 'correct_submissions'
     end
   end
 

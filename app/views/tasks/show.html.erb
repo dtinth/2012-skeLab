@@ -15,6 +15,7 @@
         <%= pluralize @task.submissions.count, 'submission' %></p>
       <%= render :partial => 'codes/results', :locals => { :noun => 'Example', :results => @task.public_results, :show_input => false } %>
       <% if can_manage_tasks %>
+        <a style="float:right" href="<%= correct_submissions_task_path(@task) %>" class="btn btn-inverse">Show Correct Submissions</a>
         <a href="<%= task_testcases_path(@task) %>" class="btn btn-inverse">Edit Testcases</a>
 	<% if @task.reference_code %>
 	  <a href="<%= code_path(@task.reference_code) %>" class="btn btn-inverse">Show Reference Code</a>
