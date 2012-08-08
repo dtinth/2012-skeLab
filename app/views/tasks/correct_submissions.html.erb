@@ -3,7 +3,7 @@
   <table class="table table-bordered">
     <% @submissions.each do |submission| %>
       <tr>
-        <td><%= link_to "Submission ##{submission.id}" %></td>
+        <td><%= link_to "Submission ##{submission.id}", submission %></td>
         <td><%= user_html submission.user %></td>
       </tr>
     <% end %>
