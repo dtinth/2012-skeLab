@@ -34,7 +34,7 @@
               <li><%= link_to raw("<i class=icon-group></i> Attendance Checking"), attendances_path %></li>
               <li><%= link_to raw("<i class=icon-dashboard></i> Dashboard"), users_path %></li>
             <% end %>
-            <li><%= link_to raw("<i class=icon-key></i> Logout"), logout_path %></li>
+            <li><%= link_to raw("<i class=icon-key></i> Logout (#{ current_user.name })"), logout_path %></li>
           <% else %>
             <li><%= link_to raw("<i class=icon-key></i> Login"), login_path %></li>
           <% end %>
