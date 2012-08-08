@@ -27,6 +27,7 @@ class UserSessionsController < ApplicationController
   def handle_facebook_redirect
     raise "no fb" unless params[:fbid].present?
     raise "no fb" unless params[:fbname].present?
+    raise "undefined" if params[:fbname] == 'undefined'
     @user = User.find_by_fbid(params[:fbid])
     unless @user
       @user = User.new(:login => "FB_#{params[:fbid]}")
