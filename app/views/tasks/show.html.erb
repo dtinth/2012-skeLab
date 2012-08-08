@@ -13,7 +13,9 @@
       </div>
       <p class="meta"><%= pluralize @task.testcases.count, 'testcase' %>,
         <%= pluralize @task.submissions.count, 'submission' %></p>
-      <%= render :partial => 'codes/results', :locals => { :noun => 'Example', :results => @task.public_results, :show_input => false } %>
+      <div class="show-spaces">
+        <%= render :partial => 'codes/results', :locals => { :noun => 'Example', :results => @task.public_results, :show_input => false } %>
+      </div>
       <% if can_manage_tasks %>
         <a style="float:right" href="<%= correct_submissions_task_path(@task) %>" class="btn btn-inverse">Show Correct Submissions</a>
         <a href="<%= task_testcases_path(@task) %>" class="btn btn-inverse">Edit Testcases</a>
